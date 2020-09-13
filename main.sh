@@ -2,6 +2,8 @@
 
 # main script to run in container
 
+echo "Running at `date`"
+
 if [ -z "$PROJECT_DIR" ]; then
     PROJECT_DIR=~
 fi
