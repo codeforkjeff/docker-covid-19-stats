@@ -2,6 +2,8 @@
 
 # use the ssh keys on the host system
 
+# to debug, add -i -t --entrypoint /bin/bash
+
 exec docker run \
      --rm \
      --name covid-19-stats-container \
