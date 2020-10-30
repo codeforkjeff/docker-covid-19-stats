@@ -13,7 +13,24 @@ This is just for my personal use, so a few things are hardcoded that probably sh
 docker build . -t covid-19-stats-image
 ```
 
-Run the code. This can be put in a cron job.
+Create a network:
+
+```
+docker network create net-covid19
+```
+
+Start up a postgres container:
+
+```
+./run_postgres.sh
+```
+
+create the database:
+```
+docker exec -t covid19-postgres psql -U postgres -c "create database covid19"
+```
+
+Run the ELT code. This can be put in a cron job.
 
 ```
 ./run_docker.sh

@@ -9,4 +9,5 @@ exec docker run \
      --name covid-19-stats-container \
      -v covid-19-stats-volume:"/app/project" \
      -v "$HOME/.ssh":"/root/.ssh" \
+     --network net-covid19 \
      covid-19-stats-image
