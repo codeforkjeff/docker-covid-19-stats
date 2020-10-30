@@ -15,10 +15,6 @@ VOLUME /app/project
 
 ENV PROJECT_DIR /app/project
 
-ENV C19_DBHOST covid19-postgres
-ENV C19_DBUSER postgres
-ENV C19_DBPASSWORD zzz
-
 COPY main.sh /app
 
 ENTRYPOINT /app/main.sh
