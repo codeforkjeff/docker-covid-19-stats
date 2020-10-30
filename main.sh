@@ -79,8 +79,10 @@ EOF
 
 # build
 
-make depend
-make
+make extract
+make load
+make transform
+make export
 
 # commit
 
