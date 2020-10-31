@@ -91,3 +91,6 @@ ls -al data
 
 git commit -m "data update" data/
 git push
+
+echo "Finished at `date`"
+
