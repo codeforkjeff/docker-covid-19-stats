@@ -6,7 +6,7 @@
 # if bash-completion is installed, but it desn't, so we source it here.
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
-echo "Running at `date`"
+echo "==== Running at `date`"
 
 if [ -z "$PROJECT_DIR" ]; then
     PROJECT_DIR=~
@@ -37,10 +37,14 @@ git pull
 
 # setup environments / make sure they're up to date
 
+echo "==== Running setup_envs.sh"
+
 . ./setup_envs.sh
 
-# build
+# do the ELT
 
-. ./build.sh
+echo "==== Running elt.sh"
 
-echo "Finished at `date`"
+. ./elt.sh
+
+echo "==== Finished at `date`"
