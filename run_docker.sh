@@ -10,5 +10,6 @@ exec docker run \
      -v covid-19-stats-volume:"/app/project" \
      -v "$HOME/.ssh":"/root/.ssh" \
      -v "service-account.json":"/root/service-account.json" \
+     -v "profiles.yml":"/root/.dbt/profiles.yml" \
      --network net-covid19 \
      covid-19-stats-image
