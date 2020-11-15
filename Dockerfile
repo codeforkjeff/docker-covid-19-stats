@@ -7,7 +7,7 @@ RUN apt update && apt-get -y install git make python3 python3-pip python3-venv s
 RUN git config --global user.email "jeff@codefork.com"
 RUN git config --global user.name "codeforkjeff"
 
-ENV WORKON_HOME /root/.virtualenvs
+ENV WORKON_HOME /app/project/.virtualenvs
 
 RUN mkdir /root/.dbt
 
