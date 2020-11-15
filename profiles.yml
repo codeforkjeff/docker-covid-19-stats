@@ -1,5 +1,5 @@
 
-covid19:
+covid19_bigquery:
   outputs:
     dev:
       type: bigquery
