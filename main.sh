@@ -37,7 +37,7 @@ git pull
 
 # setup environments / make sure they're up to date
 
-. ./setup_env.sh
+. ./setup_envs.sh
 
 # build
 
