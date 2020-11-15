@@ -33,6 +33,7 @@ fi
 ## make sure repo is up to date
 
 cd $PROJECT_DIR/covid-19-stats
+git checkout master
 git pull
 
 # setup environments / make sure they're up to date
