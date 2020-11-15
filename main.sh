@@ -2,7 +2,11 @@
 
 # main script to run in container
 
-echo "Running at `date`"
+# this is supposed to happen automatically in ubuntu 20.04
+# if bash-completion is installed, but it desn't, so we source it here.
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+echo "==== Running at `date`"
 
 if [ -z "$PROJECT_DIR" ]; then
     PROJECT_DIR=~
@@ -26,71 +30,22 @@ if [ ! -d "COVID-19" ]; then
     git clone git@github.com:CSSEGISandData/COVID-19.git
 fi
 
-## venv
-
-cd $PROJECT_DIR
-
-if [ ! -d "covid19-env" ]; then
-    python3 -m venv covid19-env
-fi
-. $PROJECT_DIR/covid19-env/bin/activate
-
-
 ## make sure repo is up to date
 
 cd $PROJECT_DIR/covid-19-stats
+git checkout master
 git pull
 
-if [ ! -f $PROJECT_DIR/installed_python_packages ] || [ $PROJECT_DIR/covid-19-stats/requirements.txt -nt $PROJECT_DIR/installed_python_packages ]; then
-    pip3 install -r requirements.txt
-    touch $PROJECT_DIR/installed_python_packages
-fi
+# setup environments / make sure they're up to date
 
-## set up dbt profile
+echo "==== Running setup_envs.sh"
 
-mkdir -p ~/.dbt
-cat <<EOF > ~/.dbt/profiles.yml
-covid19:
-  outputs:
+. ./setup_envs.sh
 
-    dev:
-      type: postgres
-      threads: 2
-      host: covid19-postgres
-      port: 5432
-      user: postgres
-      pass: zzz
-      dbname: covid19
-      schema: public
+# do the ELT
 
-    prod:
-      type: redshift
-      method: iam
-      cluster_id: [cluster_id]
-      threads: [1 or more]
-      host: [host]
-      port: [port]
-      user: [prod_user]
-      dbname: [dbname]
-      schema: [prod_schema]
+echo "==== Running elt.sh"
 
-  target: dev
-EOF
+. ./elt.sh
 
-# build
-
-make extract
-make load
-make transform
-make export
-
-# commit
-
-echo "Contents of data dir"
-ls -al data
-
-git commit -m "data update" data/
-git push
-
-echo "Finished at `date`"
-
+echo "==== Finished at `date`"
