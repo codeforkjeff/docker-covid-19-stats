@@ -11,10 +11,6 @@ ENV WORKON_HOME /root/.virtualenvs
 
 RUN mkdir /root/.dbt
 
-# paths must exist as files otherwise -v option in "docker run" will create dirs
-RUN touch /root/.dbt/profiles.yml
-RUN touch /root/service-account.json
-
 RUN mkdir /app
 
 WORKDIR /app
@@ -23,6 +19,9 @@ VOLUME /app/project
 
 ENV PROJECT_DIR /app/project
 
-COPY main.sh /app
+# paths must exist as files otherwise -v option in "docker run" will create dirs
+RUN touch /root/.dbt/profiles.yml
+RUN touch /root/service-account.json
+RUN touch /app/main.sh
 
 ENTRYPOINT /app/main.sh
