@@ -13,5 +13,4 @@ exec docker run \
      -v "$(pwd)/service-account.json":"/root/service-account.json" \
      -v "$(pwd)/profiles.yml":"/root/.dbt/profiles.yml" \
      -v "$(pwd)/main.sh":"/app/main.sh" \
-     --network net-covid19 \
      covid-19-stats-image
